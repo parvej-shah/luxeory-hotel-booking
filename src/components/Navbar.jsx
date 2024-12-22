@@ -94,10 +94,11 @@ export default function Navbar() {
               </li>
             ))}
             <li><button className="btn btn-sm hover:bg-primary border-none bg-primary/10 text-primary  hover:text-textPrimary transition-all duration-300">login</button></li>
+            <li><button className="btn btn-sm hover:bg-primary border-none bg-red-100 text-red-500 hover:text-textPrimary transition-all duration-300">Logout</button></li>
             </ul>
           </div>
         <div className="hidden lg:block">
-            <button className="btn btn-sm hover:bg-primary border-none bg-primary/10 text-primary  hover:text-textPrimary transition-all duration-300">login</button>
+            <button className="btn btn-sm hover:bg-primary border-none bg-primary/20 text-primary  hover:text-textPrimary transition-all duration-300">login</button>
         </div>
         </div>
       </div>
