@@ -19,8 +19,7 @@ export default function SignInPage() {
           </div>
           <div className="card bg-bgStart w-full max-w-sm shrink-0 shadow-2xl">
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-            <h1 className="text-4xl font-bold text-center">Register now!</h1>
-
+            <h1 className="text-4xl font-bold text-center">SignIn now!</h1>
               <div className="form-control">
                 <label className="input input-bordered flex items-center gap-2 bg-bgEnd">
                   <svg
@@ -53,18 +52,14 @@ export default function SignInPage() {
                       clipRule="evenodd"
                     />
                   </svg>
-                  <input type="password" className="grow" placeholder="password" {...register("password", { required: "Country image URL is required" ,validate: {
-                  hasUpperCase: (value) => /[A-Z]/.test(value) || "Must include an uppercase letter",
-                  hasLowerCase: (value) => /[a-z]/.test(value) || "Must include a lowercase letter",
-                  minLength: (value) => value.length >= 6 || "Must be at least 6 characters",
-                },})}/>
+                  <input type="password" className="grow" placeholder="password" {...register("password", { required: "Password is required"})}/>
                 </label>
                   {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
                 <label className="label">
                   <p className="text-textPrimary text-sm">
-                  Have an acount?
-                  <Link to={'/login'} className="link font-medium link-hover">
-                    Login
+                  Don&apos;t have an acount?
+                  <Link to={'/register'} className="link font-medium link-hover">
+                    Register
                   </Link>
                     </p>
                 </label>

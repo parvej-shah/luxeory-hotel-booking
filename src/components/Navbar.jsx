@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
@@ -14,7 +14,7 @@ export default function Navbar() {
   const [theme,setTheme] = useState(true);
   const navActive = "btn btn-sm bg-transparent border-none shadow-none text-primary hover:bg-primary/10";
   const navInActive = "btn btn-sm bg-transparent shadow-none border-none text-textPrimary hover:bg-primary/10 hover:text-primary";
-  const darkMoodToggle = (toTurn) => {
+  const darkMoodToggle = () => {
     setTheme(!theme);
     if(theme){
         document.querySelector("html").setAttribute("data-theme","light");
@@ -37,7 +37,7 @@ export default function Navbar() {
               type="checkbox"
               className="theme-controller"
               value='dark'
-              onChange={(e)=>darkMoodToggle(e.target.value)}
+              onChange={darkMoodToggle}
             />
             {/* moon icon */}
             <svg
