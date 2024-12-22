@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const navItems = [
@@ -10,6 +10,7 @@ export default function Navbar() {
     { label: "About Us", link: "/about-us" },
     { label: "Contact Us", link: "/contact-us" },
   ];
+  const navigate = useNavigate();
   const [theme,setTheme] = useState(true);
   const navActive = "btn btn-sm bg-transparent border-none shadow-none text-primary hover:bg-primary/10";
   const navInActive = "btn btn-sm bg-transparent shadow-none border-none text-textPrimary hover:bg-primary/10 hover:text-primary";
@@ -21,7 +22,6 @@ export default function Navbar() {
     else{
         document.querySelector("html").setAttribute("data-theme",'dark');
     }
-    console.log('theme changed ', theme)
   };
   return (
     <div className="bg-gradient-to-t from-bgStart to-bgEnd">
@@ -98,7 +98,7 @@ export default function Navbar() {
             </ul>
           </div>
         <div className="hidden lg:block">
-            <button className="btn btn-sm hover:bg-primary border-none bg-primary/20 text-primary  hover:text-textPrimary transition-all duration-300">login</button>
+            <button onClick={()=>navigate('/register')} className="btn btn-sm hover:bg-primary border-none bg-primary/20 text-primary  hover:text-textPrimary transition-all duration-300">login</button>
         </div>
         </div>
       </div>
