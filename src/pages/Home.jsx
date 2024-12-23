@@ -1,4 +1,5 @@
 import Banner from '../components/Banner'
+import LuxuryHotelSection from '../components/LuxeryHotel'
 import HotelMap from '../components/Map'
 import HotelGrid from '../components/OurHotels'
 import PlacesNearby from '../components/PlacesNearby'
@@ -10,6 +11,7 @@ export default function Home() {
       <Banner/>
       <PlacesNearby/>
       <HotelGrid/>
+      <LuxuryHotelSection/>
       <HotelMap/>
       <TestimonialSection/>
     </div>

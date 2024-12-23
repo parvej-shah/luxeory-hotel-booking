@@ -40,13 +40,24 @@ const testimonials = [
 const TestimonialSection = () => {
   return (
     <section className="py-12 mt-10 px-6 container mx-auto text-center">
-      <h1 className="text-4xl text-primary text-left font-bold mb-8">Our Guests Love Us</h1>
+      <h1 className="text-3xl text-primary font-bold mb-8">Our Guests Love Us</h1>
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         autoplay={{ delay: 3000, disableOnInteraction: true }}
         loop
         spaceBetween={10}
-        slidesPerView={3}
+        slidesPerView={1}
+        breakpoints={{
+          640: {
+            slidesPerView: 1, 
+          },
+          768: {
+            slidesPerView: 2, 
+          },
+          1024: {
+            slidesPerView: 3,
+          },
+        }}
       >
 {testimonials.map((testimonial, index) => (
     <SwiperSlide key={index}>
