@@ -40,7 +40,7 @@ const HotelGrid = () => {
               alt={hotel1.name}
               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
             />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent p-4 text-textPrimary h-full flex flex-col justify-end">
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent p-4 text-white h-full flex flex-col justify-end">
               <h3 className="text-lg font-bold">{hotel1.name}</h3>
               <p className="text-sm">{hotel1.address}</p>
             </div>
@@ -53,7 +53,7 @@ const HotelGrid = () => {
               alt={hotel2.name}
               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
             />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent p-4 text-textPrimary h-full flex flex-col justify-end">
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent p-4 text-white h-full flex flex-col justify-end">
               <h3 className="text-lg font-bold">{hotel2.name}</h3>
               <p className="text-sm">{hotel2.address}</p>
             </div>
@@ -66,7 +66,7 @@ const HotelGrid = () => {
               alt={hotel3.name}
               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
             />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent p-4 text-textPrimary h-full flex flex-col justify-end">
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent p-4 text-white h-full flex flex-col justify-end">
               <h3 className="text-lg font-bold">{hotel3.name}</h3>
               <p className="text-sm">{hotel3.address}</p>
             </div>
@@ -79,7 +79,7 @@ const HotelGrid = () => {
               alt={hotel4.name}
               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
             />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent p-4 text-textPrimary h-full flex flex-col justify-end">
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent p-4 text-white h-full flex flex-col justify-end">
               <h3 className="text-lg font-bold">{hotel4.name}</h3>
               <p className="text-sm">{hotel4.address}</p>
             </div>
