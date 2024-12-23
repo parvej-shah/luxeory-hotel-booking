@@ -77,7 +77,9 @@ const Banner = () => {
               <Slide
                 damping={0.2}
                 cascade
-                direction="up">
+                direction="up"
+                className="container mx-auto"
+                >
                 <h2 className="text-4xl lg:text-6xl font-bold text-white mb-1 md:mb-4 max-w-xl">
                   {slide.title}
                 </h2>
