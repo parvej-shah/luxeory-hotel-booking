@@ -40,11 +40,6 @@ const AuthProvider = ({ children }) => {
   },[])
   const onLogout = ()=>{
     signOut(auth)
-    .then(() => {
-      toast.success("Sign-out successful!");
-    }).catch(() => {
-      toast.success("An Error Occured!");
-    });
   }
   const value = {
     createUser,

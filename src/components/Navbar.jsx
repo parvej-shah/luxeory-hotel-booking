@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
+import { toast } from "react-toastify";
 
 export default function Navbar() {
   const navItems = [
@@ -12,17 +13,47 @@ export default function Navbar() {
     { label: "Contact Us", link: "/contact-us" },
   ];
   const navigate = useNavigate();
-  const [theme,setTheme] = useState(true);
-  const {user} = useAuth()
-  const navActive = "btn btn-sm bg-transparent border-none shadow-none text-primary hover:bg-primary/10";
-  const navInActive = "btn btn-sm bg-transparent shadow-none border-none text-textPrimary hover:bg-primary/10 hover:text-primary";
+  const [theme, setTheme] = useState(true);
+  const { user,onLogout } = useAuth();
+  const logout = ()=>{
+    onLogout()
+    .then(() => {
+      toast.success("Sign-out successful!");
+        navigate('/');
+    }).catch(() => {
+      toast.success("An Error Occured!");
+    });
+  }
+  const authButtons = (
+    <>
+      {user?.email ? (
+        <li>
+          <button onClick={logout} className="btn btn-sm hover:bg-primary border-none bg-red-100 text-red-500 hover:text-textPrimary transition-all duration-300">
+            Logout
+          </button>
+        </li>
+      ) : (
+        <li>
+          <button
+            onClick={() => navigate("/login")}
+            className="btn btn-sm hover:bg-primary border-none bg-primary/10 text-primary  hover:text-textPrimary transition-all duration-300"
+          >
+            login
+          </button>
+        </li>
+      )}
+    </>
+  );
+  const navActive =
+    "btn btn-sm bg-transparent border-none shadow-none text-primary hover:bg-primary/10";
+  const navInActive =
+    "btn btn-sm bg-transparent shadow-none border-none text-textPrimary hover:bg-primary/10 hover:text-primary";
   const darkMoodToggle = () => {
     setTheme(!theme);
-    if(theme){
-        document.querySelector("html").setAttribute("data-theme","light");
-    }
-    else{
-        document.querySelector("html").setAttribute("data-theme",'dark');
+    if (theme) {
+      document.querySelector("html").setAttribute("data-theme", "light");
+    } else {
+      document.querySelector("html").setAttribute("data-theme", "dark");
     }
   };
   return (
@@ -38,7 +69,7 @@ export default function Navbar() {
             <input
               type="checkbox"
               className="theme-controller"
-              value='dark'
+              value="dark"
               onChange={darkMoodToggle}
             />
             {/* moon icon */}
@@ -63,13 +94,20 @@ export default function Navbar() {
           <ul className="menu menu-horizontal px-1">
             {navItems.map((navItem, idx) => (
               <li key={idx}>
-                <NavLink className={({isActive})=>isActive?navActive:navInActive} to={navItem.link}>{navItem.label}</NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? navActive : navInActive
+                  }
+                  to={navItem.link}
+                >
+                  {navItem.label}
+                </NavLink>
               </li>
             ))}
           </ul>
         </div>
         <div className="navbar-end">
-        <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -91,20 +129,25 @@ export default function Navbar() {
               className="menu menu-sm dropdown-content bg-bgStart rounded-box z-[1] mt-3 w-36 p-2 shadow"
             >
               {navItems.map((navItem, idx) => (
-              <li key={idx}>
-                <NavLink className={({isActive})=>isActive?navActive:navInActive} to={navItem.link}>{navItem.label}</NavLink>
-              </li>
-            ))}
-            {
-              user?.email?(<li><button className="btn btn-sm hover:bg-primary border-none bg-red-100 text-red-500 hover:text-textPrimary transition-all duration-300">Logout</button></li>):(<li><button onClick={()=>navigate('/login')} className="btn btn-sm hover:bg-primary border-none bg-primary/10 text-primary  hover:text-textPrimary transition-all duration-300">login</button></li>)
-            }
+                <li key={idx}>
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? navActive : navInActive
+                    }
+                    to={navItem.link}
+                  >
+                    {navItem.label}
+                  </NavLink>
+                </li>
+              ))}
+              {authButtons}
             </ul>
           </div>
-        <div className="hidden lg:block">
-        {
-              user?.email?(<li><button className="btn btn-sm hover:bg-primary border-none bg-red-100 text-red-500 hover:text-textPrimary transition-all duration-300">Logout</button></li>):(<li><button onClick={()=>navigate('/login')} className="btn btn-sm hover:bg-primary border-none bg-primary/10 text-primary  hover:text-textPrimary transition-all duration-300">login</button></li>)
-            }
-        </div>
+          <div className="hidden lg:block">
+            <ul>
+              {authButtons}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
