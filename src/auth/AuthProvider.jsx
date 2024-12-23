@@ -7,8 +7,8 @@ import {
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
-import { toast } from "react-toastify";
 import { auth } from "../firebase.init";
+import { toast } from "react-toastify";
 const AuthContext = createContext();
 // eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
@@ -40,6 +40,12 @@ const AuthProvider = ({ children }) => {
   },[])
   const onLogout = ()=>{
     signOut(auth)
+    .then(() => {
+      toast.success("Sign-out successful!");
+    })
+    .catch(() => {
+      toast.success("An Error Occured!");
+    });
   }
   const value = {
     createUser,

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
-import { toast } from "react-toastify";
 
 export default function Navbar() {
   const navItems = [
@@ -16,19 +15,14 @@ export default function Navbar() {
   const [theme, setTheme] = useState(true);
   const { user,onLogout } = useAuth();
   const logout = ()=>{
+    navigate('/');
     onLogout()
-    .then(() => {
-      toast.success("Sign-out successful!");
-        navigate('/');
-    }).catch(() => {
-      toast.success("An Error Occured!");
-    });
   }
   const authButtons = (
     <>
       {user?.email ? (
         <li>
-          <button onClick={logout} className="btn btn-sm hover:bg-primary border-none bg-red-100 text-red-500 hover:text-textPrimary transition-all duration-300">
+          <button onClick={logout} className="btn btn-sm hover:bg-primary border-none bg-primary/10 text-primary hover:text-textPrimary transition-all duration-300">
             Logout
           </button>
         </li>
