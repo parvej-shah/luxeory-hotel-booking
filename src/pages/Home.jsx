@@ -2,6 +2,7 @@ import Banner from '../components/Banner'
 import HotelMap from '../components/Map'
 import HotelGrid from '../components/OurHotels'
 import PlacesNearby from '../components/PlacesNearby'
+import TestimonialSection from '../components/TestimonialSection'
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <PlacesNearby/>
       <HotelGrid/>
       <HotelMap/>
+      <TestimonialSection/>
     </div>
   )
 }
