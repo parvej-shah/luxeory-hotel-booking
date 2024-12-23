@@ -51,7 +51,7 @@ export default function Navbar() {
     }
   };
   return (
-    <div className="bg-gradient-to-t from-bgStart to-bgEnd">
+    < div className="bg-gradient-to-t from-bgStart to-bgEnd">
       <div className="navbar container mx-auto">
         <div className="navbar-start">
           <h2 className="text-3xl font-black text-textPrimary mr-1">
