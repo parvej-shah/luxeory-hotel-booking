@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../auth/AuthProvider";
 
 export default function Navbar() {
   const navItems = [
@@ -12,6 +13,7 @@ export default function Navbar() {
   ];
   const navigate = useNavigate();
   const [theme,setTheme] = useState(true);
+  const {user} = useAuth()
   const navActive = "btn btn-sm bg-transparent border-none shadow-none text-primary hover:bg-primary/10";
   const navInActive = "btn btn-sm bg-transparent shadow-none border-none text-textPrimary hover:bg-primary/10 hover:text-primary";
   const darkMoodToggle = () => {
@@ -93,12 +95,15 @@ export default function Navbar() {
                 <NavLink className={({isActive})=>isActive?navActive:navInActive} to={navItem.link}>{navItem.label}</NavLink>
               </li>
             ))}
-            <li><button className="btn btn-sm hover:bg-primary border-none bg-primary/10 text-primary  hover:text-textPrimary transition-all duration-300">login</button></li>
-            <li><button className="btn btn-sm hover:bg-primary border-none bg-red-100 text-red-500 hover:text-textPrimary transition-all duration-300">Logout</button></li>
+            {
+              user?.email?(<li><button className="btn btn-sm hover:bg-primary border-none bg-red-100 text-red-500 hover:text-textPrimary transition-all duration-300">Logout</button></li>):(<li><button onClick={()=>navigate('/login')} className="btn btn-sm hover:bg-primary border-none bg-primary/10 text-primary  hover:text-textPrimary transition-all duration-300">login</button></li>)
+            }
             </ul>
           </div>
         <div className="hidden lg:block">
-            <button onClick={()=>navigate('/register')} className="btn btn-sm hover:bg-primary border-none bg-primary/20 text-primary  hover:text-textPrimary transition-all duration-300">login</button>
+        {
+              user?.email?(<li><button className="btn btn-sm hover:bg-primary border-none bg-red-100 text-red-500 hover:text-textPrimary transition-all duration-300">Logout</button></li>):(<li><button onClick={()=>navigate('/login')} className="btn btn-sm hover:bg-primary border-none bg-primary/10 text-primary  hover:text-textPrimary transition-all duration-300">login</button></li>)
+            }
         </div>
         </div>
       </div>

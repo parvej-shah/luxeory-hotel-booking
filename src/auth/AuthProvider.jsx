@@ -1,5 +1,4 @@
 import { useContext, createContext, useState, useEffect } from "react";
-import { auth } from "../firebase.init";
 import {
   createUserWithEmailAndPassword,
   signInWithPopup,
@@ -9,6 +8,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { toast } from "react-toastify";
+import { auth } from "../firebase.init";
 const AuthContext = createContext();
 // eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {

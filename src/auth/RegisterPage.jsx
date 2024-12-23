@@ -2,14 +2,52 @@ import Lottie from "lottie-react";
 import { useForm } from "react-hook-form"
 import registerAnimation from '../assets/images/registerAnimation.json'
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { updateProfile} from "firebase/auth";
+import { useAuth } from "./AuthProvider";
+import { auth } from "../firebase.init";
 export default function RegisterPage() {
+  const {createUser,loginWithGoggle} = useAuth();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm()
-  const onSubmit = (data) =>{ console.log(data)}
+  const onSubmit = async (data) => {
+    const { userName, email, photoURL, password } = data;
+    createUser(email,password)
+    .then(() => {
+      // Signed up 
+      toast.success("Registration Successful!");
+      updateProfile(auth.currentUser, {
+        displayName: userName, photoURL: photoURL
+      }).then(() => {
+        // Profile updated!
+      }).catch((error) => {
+        toast.error("Profile Update Failed: " + error.message);
+      });
+      navigate("/");
+    })
+    .catch((error) => {
+      /* const errorCode = error.code; */
+      toast.error("Registration Failed: " + error.message);
+    });
+  };
+
+  const handleLoginWithGoogle = () =>{
+    loginWithGoggle()
+    .then(()=>{
+      toast.success("Login Successful!");
+      navigate('/')
+    })
+    .catch((error)=>{
+      toast.error("Login failed");
+      console.log(error.code);
+    })
+  }
   return (
     <div className="lg:py-10 bg-bgEnd ">
       <div className="text-textPrimary">
@@ -18,8 +56,9 @@ export default function RegisterPage() {
             <Lottie animationData={registerAnimation}/>
           </div>
           <div className="card bg-bgStart w-full max-w-sm shrink-0 shadow-2xl">
-            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+            <div className="card-body">
             <h1 className="text-4xl font-bold text-center">Register now!</h1>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div className="form-control">
                 <label className="input input-bordered flex bg-bgEnd items-center gap-2">
                   <svg
@@ -100,9 +139,10 @@ export default function RegisterPage() {
               <div className="form-control mt-3">
                 <button type='submit' className="btn bg-secondary font-medium border-none text-white/90 hover:bg-secondary/10 hover:text-secondary hover:border hover:border-secondary">Register</button>
               </div>
-              <div className="divider text-primary">OR</div>
-              <button className="btn hover:bg-secondary font-medium border-none hover:text-white/90 bg-secondary/10 text-secondary flex justify-center items-center"><FcGoogle className="text-3xl"/> Login with Goggle</button>
             </form>
+              <div className="divider text-primary">OR</div>
+              <button onClick={handleLoginWithGoogle} className="btn hover:bg-secondary font-medium border-none hover:text-white/90 bg-secondary/10 text-secondary flex justify-center items-center"><FcGoogle className="text-3xl"/> Login with Goggle</button>
+            </div>
           </div>
         </div>
       </div>
