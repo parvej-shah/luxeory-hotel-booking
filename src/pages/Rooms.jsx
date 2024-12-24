@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import roomHeader from "../assets/images/roomHeader.jpg";
 import API from "../hooks/useAPI";
 import { useQuery } from "@tanstack/react-query";
@@ -11,9 +10,7 @@ export default function Rooms() {
     try {
       const { data } = await API.get("rooms");
       return data;
-    } catch (error) {
-      return error;
-    }
+    } catch{ /* empty */ }
   };
   const { status, data:rooms } = useQuery({
     queryKey: ["rooms"],
@@ -41,9 +38,9 @@ export default function Rooms() {
         {/* cards */}
         <div className="container mx-auto"> 
         {
-        rooms && rooms?.map(room=>(
+        rooms?.map(room=>(
             <Link key={room._id} to={`/rooms/${room._id}`}>
-            <div  className="flex flex-col mx-2 rounded-lg md:flex-row items-center my-8 p-4 md:p-6 bg-bgStart shadow-lg">
+            <div  className="flex flex-col mx-2 rounded-lg md:flex-row items-center my-10 p-4 md:p-6 bg-bgStart shadow-lg">
         <div className="md:w-1/3">
    
             <img
@@ -55,9 +52,9 @@ export default function Rooms() {
         </div>
   
         {/* Right Content */}
-        <div className="md:w-2/3 pl-6">
+        <div className="md:w-2/3 md:pl-6">
         <div className="flex items-center mb-2">
-            <div className={`text-sm font-medium ${!room?.available?"text-red-500 bg-red-200":"text-secondary bg-secondary/10"} w-fit px-2 rounded-full`}>
+            <div className={`text-sm font-medium ${!room?.available?"text-red-500 bg-red-200":"text-secondary bg-secondary/10"} w-fit px-2 rounded-full mt-4 md:mt-0`}>
               {room?.available?"Available":"Booked"}
             </div>
         </div>
