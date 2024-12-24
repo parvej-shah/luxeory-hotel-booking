@@ -120,7 +120,7 @@ export default function Navbar() {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-bgStart rounded-box z-[1] mt-3 w-36 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-bgStart rounded-box z-[10] mt-3 w-36 p-2 shadow"
             >
               {navItems.map((navItem, idx) => (
                 <li key={idx}>
