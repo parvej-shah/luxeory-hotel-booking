@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import {  useQuery ,useMutation, useQueryClient} from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import API from "../hooks/useAPI";
 import LoadingClip from "../components/LoadingClip";
@@ -19,6 +19,7 @@ export default function RoomDetails() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const { user } = useAuth();
+  const queryClient = useQueryClient();
   const getRoomDetails = async () => {
     try {
       const { data } = await API.get(`rooms/${id}`);
@@ -44,41 +45,48 @@ export default function RoomDetails() {
     }
   }, [roomDetails]);
   const navigate = useNavigate()
-  /* const handleBooking = ()=>{
+  const handleBooking = ()=>{
     if(!user?.email){
         toast.error("Login is required");
         navigate('/login');
         return;
     }
     if(!roomDetails?.available){
-        toast.error("Room is Not Available");
+        toast.error("Room is booked!");
         return;
     }
     setModalIsOpen(true);
-  } */
-  const handleConfirmBooking = async() => {
+  }
+  const mutation = useMutation(
+    async (bookingData) => {
+      const { data } = await API.post("bookings", bookingData);
+      return data;
+    },
+    {
+      onSuccess: (data) => {
+        if (data.acknowledged) {
+          toast.success(`Room booked for ${selectedDate.toDateString()}!`);
+          setModalIsOpen(false);
+          queryClient.invalidateQueries({ queryKey: ["roomDetails"] });
+        }
+      },
+      onError: () => {
+        toast.error("Sorry! Try again.");
+      },
+    }
+  );
+
+  const handleConfirmBooking = () => {
     if (!selectedDate) {
       toast.error("Please select a booking date.");
       return;
     }
-    console.log(selectedDate);
-    // Mock booking confirmation
     const bookingdata = {
         roomId:roomDetails?._id,
         email:user?.email,
         bookingDate:selectedDate
     }
-    try{
-        const {data} = await API.post('bookings',bookingdata)
-        console.log(data);
-        if(data.acknowledged){
-            toast.success(`Room booked for ${selectedDate.toDateString()}!`);
-            setModalIsOpen(false);
-        }
-    }
-    catch{
-        toast.success(`Sorry! Try Again.`);
-    }
+    mutation.mutate(bookingdata);
   };
   if (status === "loading") {
     return <LoadingClip />;
