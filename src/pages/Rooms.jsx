@@ -3,7 +3,7 @@ import roomHeader from "../assets/images/roomHeader.jpg";
 import API from "../hooks/useAPI";
 import { useQuery } from "@tanstack/react-query";
 import { AiOutlineArrowRight } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export default function Rooms() {
   const navigate = useNavigate();
   const getRooms = async () => {
@@ -39,53 +39,47 @@ export default function Rooms() {
         </div>
         </div>
         {/* cards */}
-        <div>
-        {/* card */}
+        <div className="container mx-auto"> 
         {
         rooms && rooms?.map(room=>(
-            <div key={room._id} className="flex flex-col container mx-auto md:flex-row items-center my-10 p-4 md:p-6 bg-bgStart rounded-lg shadow-lg">
-        {/* Left Image */}
+            <Link key={room._id} to={`/rooms/${room._id}`}>
+            <div  className="flex flex-col mx-2 rounded-lg md:flex-row items-center my-8 p-4 md:p-6 bg-bgStart shadow-lg">
         <div className="md:w-1/3">
-        {
-            room?.roomImages?.map((img,idx)=>(
-                <img key={idx}
-            src={img}
+   
+            <img
+            src={room?.thumbnail}
             alt="Studio Sea View"
-            className="rounded-lg lg:h-[200px] w-full"
+            className="rounded-lg lg:h-60 w-full object-cover"
         />
-            ))
-        }
         
         </div>
   
         {/* Right Content */}
         <div className="md:w-2/3 pl-6">
-        {/* Stars */}
         <div className="flex items-center mb-2">
-            <span className="text-yellow-500 text-xl">★ ★ ★ ★ ★</span>
+            <div className={`text-sm font-medium ${!room?.available?"text-red-500 bg-red-200":"text-secondary bg-secondary/10"} w-fit px-2 rounded-full`}>
+              {room?.available?"Available":"Booked"}
+            </div>
         </div>
-        {/* Title */}
-        <h2 className="text-2xl text-primary font-bold mb-2">Studio Sea View</h2>
-        {/* Description */}
+        <h2 className="text-2xl text-primary font-bold mb-2">{room?.roomTitle}</h2>
         <p className="text-textPriamry/60 mb-4">
-            The Superior Rooms pay tribute to fashion and craftsmanship. The rooms
-            are approximately 19m2 with views of Rue d’Alger and Jardin des
-            Tuileries. The selection and pairing of materials has ...
+            {room?.roomDescription}
         </p>
         {/* Price and Button */}
-        <div className="flex flex-col md:flex-row gap-4 md:items-center justify-between">
+        <div className="flex flex-col gap-4 justify-center">
             <p className="text-lg font-semibold  text-textPrimary">
-            PRICE: <span className="text-secondary">$218.9</span><span className="text-sm">/night</span>
+            <span className="text-secondary">{room?.price}</span><span className="text-sm">/night</span>
             </p>
             <button
                 onClick={() => navigate("/rooms")}
-                className="btn bg-primary/90 border-none text-white font-bold px-6 py-3 rounded-lg hover:bg-primary flex items-center gap-2"
+                className="btn md:w-1/2 bg-primary/90 border-none text-white font-bold px-6 py-3 rounded-lg hover:bg-primary flex items-center gap-2"
                 >
                 Book Now <AiOutlineArrowRight className="text-lg" />
                 </button>
         </div>
         </div>
-    </div>
+            </div>
+            </Link>
         ))
         }
         </div>
