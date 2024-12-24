@@ -88,7 +88,7 @@ const Banner = () => {
                 </p>
                 <div className="flex justify-center md:justify-start">
                 <button
-                  onClick={() => navigate("/all-visas")}
+                  onClick={() => navigate("/rooms")}
                   className="btn bg-primary/90 border-none text-white font-bold px-6 py-3 rounded-lg hover:bg-primary flex items-center gap-2"
                 >
                   Book Now <AiOutlineArrowRight className="text-lg" />
