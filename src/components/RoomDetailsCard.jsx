@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
-import { toast } from "react-toastify";
 import "react-image-gallery/styles/css/image-gallery.css";
 import ImageGallery from "react-image-gallery";
-export default function RoomDetailsCard({ roomDetails, images }) {
+export default function RoomDetailsCard({ roomDetails,handleBooking, images }) {
   const {
     roomTitle,
     roomSize,
@@ -14,7 +13,6 @@ export default function RoomDetailsCard({ roomDetails, images }) {
     reviewCount,
     available
   } = roomDetails;
-  
   return (
     <div className="bg-bgStart">
       {/* Room Details Container */}
@@ -91,9 +89,7 @@ export default function RoomDetailsCard({ roomDetails, images }) {
               ${price} <span className="text-lg font-normal">/ Night</span>
             </p>
             <button
-              onClick={() =>
-                toast.success("Booking functionality coming soon!")
-              }
+              onClick={handleBooking}
               className="btn bg-secondary/90 border-none text-white font-bold px-6 py-3 rounded-lg hover:bg-secondary"
             >
               Let&apos;s Book Now
