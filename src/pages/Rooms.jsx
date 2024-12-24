@@ -4,6 +4,7 @@ import API from "../hooks/useAPI";
 import { useQuery } from "@tanstack/react-query";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
+import LoadingClip from "../components/LoadingClip";
 export default function Rooms() {
   const navigate = useNavigate();
   const getRooms = async () => {
@@ -14,15 +15,14 @@ export default function Rooms() {
       return error;
     }
   };
-  const { isLoading,status, data:rooms } = useQuery({
+  const { status, data:rooms } = useQuery({
     queryKey: ["rooms"],
     queryFn: getRooms,
   });
 
   if (status=='loading') {
-    return <p>Loading...</p>;
+    return <LoadingClip/>;
   }
-  console.log(rooms);
   return (
     <div>
         <div
