@@ -89,9 +89,16 @@ const MyBookings = () => {
     updateBookingDateMutation.mutate({ bookingId, newDate,roomId });
   };
   // review handle
-  const handleReviewSubmit = (review) => {
+  const handleReviewSubmit = async(review) => {
     console.log("Review submitted:", review);
-    // Send the review to the server here
+    const {data} = await API.post('reviews',review);
+    if(data.acknowledged){
+      toast.success("Thank You for Reviewing")
+    }
+    else{
+      toast.error("Sorry! Try Again.")
+    }
+    console.log(data);
   };
 console.log(bookings)
   if (status === "loading") {

@@ -18,6 +18,7 @@ const ReviewModal = ({ isOpen, setIsOpen, username, onSubmitReview }) => {
     }
 
     const reviewData = {
+        roomId:isOpen.roomId,
       username,
       rating,
       comment,
