@@ -27,7 +27,7 @@ const PlacesNearby = () => {
       ]
   return (
     <section className="py-16 px-6 container mx-auto">
-      <h1 className="text-4xl font-bold text-left text-secondary mb-8">Places Nearby</h1>
+      <h2 className="text-3xl font-bold text-center text-primary mb-8">Places Nearby</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {places.map((place, index) => (
           <div

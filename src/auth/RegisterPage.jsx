@@ -34,9 +34,9 @@ export default function RegisterPage() {
           });
         navigate("/");
       })
-      .catch((error) => {
+      .catch(() => {
         /* const errorCode = error.code; */
-        toast.error("Registration Failed: " + error.message);
+        toast.error("Registration Failed!");
       });
   };
 
@@ -46,13 +46,12 @@ export default function RegisterPage() {
         toast.success("Login Successful!");
         navigate("/");
       })
-      .catch((error) => {
+      .catch(() => {
         toast.error("Login failed");
-        console.log(error.code);
       });
   };
   return (
-    <div className="lg:py-10 bg-bgEnd ">
+    <div className="py-10 px-4 bg-bgEnd ">
       <div className="text-textPrimary">
         <div className="flex flex-col lg:flex-row-reverse justify-center items-center gap-4">
           <div className="text-center lg:text-left">
@@ -61,7 +60,7 @@ export default function RegisterPage() {
           <div className="card bg-bgStart w-full max-w-sm shrink-0 shadow-2xl">
             <div className="card-body">
               <h1 className="text-4xl font-bold text-primary text-center">
-                Register now!
+                Register
               </h1>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div className="form-control">

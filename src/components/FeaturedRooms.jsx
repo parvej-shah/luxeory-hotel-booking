@@ -23,7 +23,7 @@ const FeaturedRooms = () => {
   return (
     <div className="bg-bgStart py-10  px-4">
       <div className="container mx-auto">
-        <h2 className="text-3xl font-bold text-left mb-8 text-primary">Featured Rooms</h2>
+        <h2 className="text-3xl font-bold text-center mb-8 text-primary">Featured Rooms</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {rooms?.slice(0, 6).map((room) => (
             <div

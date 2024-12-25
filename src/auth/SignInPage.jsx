@@ -38,7 +38,7 @@ export default function SignInPage() {
       });
   };
   return (
-    <div className="lg:py-10 bg-bgEnd ">
+    <div className="py-10 bg-bgEnd px-4 ">
       <div className="text-textPrimary">
         <div className="flex flex-col lg:flex-row-reverse justify-center items-center gap-4">
           <div className="text-center lg:text-left">
@@ -46,7 +46,7 @@ export default function SignInPage() {
           </div>
           <div className="card bg-bgStart w-full max-w-sm shrink-0 shadow-2xl">
             <div className="card-body">
-              <h1 className="text-4xl font-bold text-primary text-center">Signin now!</h1>
+              <h1 className="text-4xl font-bold text-primary text-center">Sign In</h1>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div className="form-control">
                   <label className="input input-bordered flex items-center gap-2 bg-bgEnd">

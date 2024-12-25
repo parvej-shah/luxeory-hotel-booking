@@ -1,6 +1,10 @@
 /* eslint-disable react/prop-types */
 import "react-image-gallery/styles/css/image-gallery.css";
 import ImageGallery from "react-image-gallery";
+import TestimonialSection from "./TestimonialSection";
+import API from "../hooks/useAPI";
+import { useQuery } from "@tanstack/react-query";
+import LoadingClip from "./LoadingClip";
 export default function RoomDetailsCard({ roomDetails,handleBooking, images }) {
   const {
     roomTitle,
@@ -13,10 +17,21 @@ export default function RoomDetailsCard({ roomDetails,handleBooking, images }) {
     reviewCount,
     available
   } = roomDetails;
+  const getTestimonial = async () => {
+    const { data } = await API.get("reviews",{params:{roomId:roomDetails?._id}});
+    return data;
+};
+const { data:testimonials , status} = useQuery({
+  queryKey: ["testimonials"],
+  queryFn: getTestimonial,
+});
+if(status=='loading'){
+  return <LoadingClip/>
+}
   return (
-    <div className="bg-bgEnd">
+    <div className="bg-bgEnd pb-10">
       {/* Room Details Container */}
-      <div className="grid grid-cols-1 container mx-auto bg-bgEnd md:grid-cols-2 gap-8 pb-10 pt-4 ">
+      <div className="grid grid-cols-1 container mx-auto bg-bgEnd md:grid-cols-2 gap-8  pt-4 ">
         {/* Left: Image Gallery */}
         <div>
           <ImageGallery
@@ -32,7 +47,7 @@ export default function RoomDetailsCard({ roomDetails,handleBooking, images }) {
             renderThumbInner={(item) => (
               <img
                 src={item.thumbnail}
-                className="w-32 h-[80px]"
+                className="w-32 h-[80px] object-cover"
                 alt="thumbnail"
               />
             )}
@@ -97,6 +112,9 @@ export default function RoomDetailsCard({ roomDetails,handleBooking, images }) {
           </div>
         </div>
       </div>
+      {
+      testimonials.length>0?<TestimonialSection testimonials={testimonials}/>:<p className="text-xl text-center font-medium text-textPrimary py-6">You are first to Review the Room</p>
+      }
     </div>
   );
 }
