@@ -14,9 +14,9 @@ export default function RoomDetailsCard({ roomDetails,handleBooking, images }) {
     available
   } = roomDetails;
   return (
-    <div className="bg-bgStart">
+    <div className="bg-bgEnd">
       {/* Room Details Container */}
-      <div className="grid grid-cols-1 container mx-auto bg-bgStart md:grid-cols-2 gap-8 pb-10 pt-4 ">
+      <div className="grid grid-cols-1 container mx-auto bg-bgEnd md:grid-cols-2 gap-8 pb-10 pt-4 ">
         {/* Left: Image Gallery */}
         <div>
           <ImageGallery
