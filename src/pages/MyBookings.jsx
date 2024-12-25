@@ -8,12 +8,14 @@ import { useAuth } from "../auth/AuthProvider";
 import LoadingClip from "../components/LoadingClip";
 import { differenceInCalendarDays } from "date-fns";
 import useSecureAPI from "../hooks/useSecureAPI";
+import ReviewModal from "../components/ReviewModal";
 const MyBookings = () => {
   const queryClient = useQueryClient();
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [newDate, setNewDate] = useState(new Date());
   const {user} = useAuth();
   const secureAPI = useSecureAPI();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   // Fetch bookings for the logged-in user
   const fetchMyBookings = async () => {
     const { data } = await secureAPI.get(`bookings/${user?.email}`);
@@ -86,6 +88,11 @@ const MyBookings = () => {
     }
     updateBookingDateMutation.mutate({ bookingId, newDate,roomId });
   };
+  // review handle
+  const handleReviewSubmit = (review) => {
+    console.log("Review submitted:", review);
+    // Send the review to the server here
+  };
 console.log(bookings)
   if (status === "loading") {
     return <LoadingClip/>
@@ -130,17 +137,7 @@ console.log(bookings)
                   </button>
                   <button
                     onClick={() =>
-                      Swal.fire({
-                        title: "Write Your Review",
-                        input: "textarea",
-                        inputPlaceholder: "Type your review here...",
-                        showCancelButton: true,
-                        confirmButtonText: "Submit",
-                      }).then((result) => {
-                        if (result.isConfirmed) {
-                          toast.success("Thank you for your review!");
-                        }
-                      })
+                      setIsModalOpen(booking)
                     }
                     className="btn bg-secondary hover:bg-secondary/80 border-none text-white/80 btn-sm mr-2"
                   >
@@ -191,6 +188,10 @@ console.log(bookings)
           </div>
         </div>
       )}
+      <ReviewModal  isOpen={isModalOpen}
+        setIsOpen={setIsModalOpen}
+        username={user?.displayName}
+        onSubmitReview={handleReviewSubmit}/>
     </div>
   );
 };
