@@ -17,13 +17,11 @@ const useSecureAPI = () => {
         instance.interceptors.response.use(response => {
             return response;
         }, error => {
-            console.log('api response error status', error.status);
             if (error.status === 401 || error.status === 403) {
                 signOut(auth)
                     .then(() => {
                         navigate('/login')
                     })
-                    .catch(err => console.log(err))
             }
             return Promise.reject(error);
         })

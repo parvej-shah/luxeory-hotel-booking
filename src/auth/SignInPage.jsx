@@ -32,9 +32,8 @@ export default function SignInPage() {
         toast.success("Login Successful!");
         navigate("/");
       })
-      .catch((error) => {
+      .catch(() => {
         toast.error("Login failed");
-        console.log(error.code);
       });
   };
   return (

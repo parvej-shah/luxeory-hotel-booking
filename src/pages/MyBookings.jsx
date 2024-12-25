@@ -90,7 +90,6 @@ const MyBookings = () => {
   };
   // review handle
   const handleReviewSubmit = async(review) => {
-    console.log("Review submitted:", review);
     const {data} = await API.post('reviews',review);
     if(data.acknowledged){
       toast.success("Thank You for Reviewing")
@@ -98,9 +97,7 @@ const MyBookings = () => {
     else{
       toast.error("Sorry! Try Again.")
     }
-    console.log(data);
   };
-console.log(bookings)
   if (status === "loading") {
     return <LoadingClip/>
   }

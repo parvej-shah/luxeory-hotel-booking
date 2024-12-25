@@ -34,8 +34,7 @@ const AuthProvider = ({ children }) => {
         setUser(userResult);
         if (userResult?.email) {
           const user = { email: userResult.email };
-          API.post("jwt", user, { withCredentials: true }).then((res) => {
-            console.log("login token", res.data);
+          API.post("jwt", user, { withCredentials: true }).then(() => {
             setLoading(false);
           });
         } else {
@@ -45,8 +44,7 @@ const AuthProvider = ({ children }) => {
             {
               withCredentials: true,
             }
-          ).then((res) => {
-            console.log("logout", res.data);
+          ).then(() => {
             setLoading(false);
           });
         }
