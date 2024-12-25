@@ -7,14 +7,16 @@ import DatePicker from "react-date-picker";
 import { useAuth } from "../auth/AuthProvider";
 import LoadingClip from "../components/LoadingClip";
 import { differenceInCalendarDays } from "date-fns";
+import useSecureAPI from "../hooks/useSecureAPI";
 const MyBookings = () => {
   const queryClient = useQueryClient();
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [newDate, setNewDate] = useState(new Date());
   const {user} = useAuth();
+  const secureAPI = useSecureAPI();
   // Fetch bookings for the logged-in user
   const fetchMyBookings = async () => {
-    const { data } = await API.get(`bookings/${user?.email}`);
+    const { data } = await secureAPI.get(`bookings/${user?.email}`);
     return data;
   };
 
@@ -89,6 +91,7 @@ console.log(bookings)
     return <LoadingClip/>
   }
 
+
   return (
     <div className="container mx-auto p-5">
       <h2 className="text-2xl font-bold mb-5 text-textPrimary">My Bookings</h2>
@@ -118,7 +121,7 @@ console.log(bookings)
                 <td>{booking.roomTitle}</td>
                 <td>${booking.price}</td>
                 <td>{new Date(booking.bookingDate).toDateString()}</td>
-                <td>
+                <td className="space-y-2 md:space-y-0">
                   <button
                     onClick={() => handleCancelBooking(booking._id,booking.roomId,booking.bookingDate)}
                     className="btn btn-error btn-sm mr-2"
