@@ -34,7 +34,6 @@ export default function Home() {
             >
               <AiOutlineClose size={24} />
             </button>
-
             {/* Modal Content */}
             <div className="">
               <img

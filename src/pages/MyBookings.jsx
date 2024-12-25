@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import DatePicker from "react-date-picker";
 import { useAuth } from "../auth/AuthProvider";
 import LoadingClip from "../components/LoadingClip";
-
+import { differenceInCalendarDays } from "date-fns";
 const MyBookings = () => {
   const queryClient = useQueryClient();
   const [selectedBooking, setSelectedBooking] = useState(null);
@@ -56,7 +56,7 @@ const MyBookings = () => {
   );
 
   // Handle cancel booking
-  const handleCancelBooking = (bookingId,roomId) => {
+  const handleCancelBooking = (bookingId,roomId,bookingDate) => {
     Swal.fire({
       title: "Are you sure?",
       text: "Do you want to cancel this booking?",
@@ -66,6 +66,11 @@ const MyBookings = () => {
       cancelButtonText: "No, keep it",
     }).then((result) => {
       if (result.isConfirmed) {
+        const calendarDayGap = differenceInCalendarDays(bookingDate, new Date());
+        if(calendarDayGap<1){
+          toast.error("Booking can't be cancelled!");
+          return;
+        }
         cancelBookingMutation.mutate({bookingId,roomId});
       }
     });
@@ -115,7 +120,7 @@ console.log(bookings)
                 <td>{new Date(booking.bookingDate).toDateString()}</td>
                 <td>
                   <button
-                    onClick={() => handleCancelBooking(booking._id,booking.roomId)}
+                    onClick={() => handleCancelBooking(booking._id,booking.roomId,booking.bookingDate)}
                     className="btn btn-error btn-sm mr-2"
                   >
                     Cancel
