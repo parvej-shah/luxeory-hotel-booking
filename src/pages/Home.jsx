@@ -8,9 +8,18 @@ import TestimonialSection from '../components/TestimonialSection'
 import  { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import offer from '../assets/images/offer.webp'
+import API from '../hooks/useAPI'
+import { useQuery } from '@tanstack/react-query'
 export default function Home() {
   const [isOpen, setIsOpen] = useState(true);
-
+  const getTestimonial = async () => {
+    const { data } = await API.get("reviews");
+    return data;
+};
+const { data:testimonials } = useQuery({
+  queryKey: ["testimonial-all"],
+  queryFn: getTestimonial,
+});
   const closeModal = () => {
     setIsOpen(false);
   };
@@ -37,7 +46,7 @@ export default function Home() {
             {/* Modal Content */}
             <div className="">
               <img
-                src={offer} // Replace with your promotional banner image URL
+                src={offer}
                 alt="Special Offer"
                 className="rounded-lg w-full h-auto"
               />
@@ -49,8 +58,8 @@ export default function Home() {
       <FeaturedRooms/>
       <HotelGrid/>
       <LuxuryHotelSection/>
+      <TestimonialSection testimonials={testimonials}/>
       <HotelMap/>
-      <TestimonialSection/>
     </div>
   )
 }

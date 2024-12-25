@@ -1,10 +1,12 @@
-import { FaQuoteRight } from "react-icons/fa";
+/* eslint-disable react/prop-types */
+import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-const testimonials = [
+import ReactStars from "react-stars";
+/* const testimonials = [
   {
     name: "Jacob Jones",
     country: "France",
@@ -35,12 +37,12 @@ const testimonials = [
     text: "I will be pet i will be pet and then i will hiss sit in box get scared by doggo also cucumerro yet the best thing in the call universe is a cardboard box.",
     image: "https://via.placeholder.com/80", // Replace with actual image URL
   },
-];
+]; */
 
-const TestimonialSection = () => {
+const TestimonialSection = ({testimonials}) => {
   return (
     <section className="py-12 mt-10 px-6 container mx-auto text-center">
-      <h1 className="text-3xl text-primary font-bold mb-8">Our Guests Love Us</h1>
+      <h2 className="text-3xl text-primary font-bold mb-8">Our Guests Love Us</h2>
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         autoplay={{ delay: 3000, disableOnInteraction: true }}
@@ -59,23 +61,28 @@ const TestimonialSection = () => {
           },
         }}
       >
-{testimonials.map((testimonial, index) => (
+{testimonials?.map((testimonial, index) => (
     <SwiperSlide key={index}>
           <div
             key={index}
-            className="bg-bgStart text-textPrimary shadow-lg rounded-lg p-6 text-center space-y-4"
+            className="bg-bgStart text-textPrimary shadow-lg rounded-lg p-6 text-center space-y-2"
           >
-            <p className="font-medium text-sm text-textPrimary/70">{testimonial.text}</p>
-            <div className="flex items-center gap-4 text-left justify-end">
-            <div className="w-16 h-16 rounded-full overflow-hidden">
-              <img
-                src={testimonial.image}
-                alt={testimonial.name}
-                className="w-full h-full object-cover"
+            <FaQuoteLeft className="text-primary text-xl" />
+            <div className="flex justify-center cursor-not-allowed z-10">
+            <ReactStars
+            edit={false}
+                count={5}
+                size={30}
+                value={testimonial?.rating}
+                color2={"#facc15"} // Star color when filled
+                color1={"#d1d5db"} 
+                className="cursor-not-allowed"// Star color when empty
               />
             </div>
-            <h3 className="text-lg text-secondary font-semibold">{testimonial.name} <br /><span className="text-sm text-textPrimary/80">{testimonial.country}</span></h3>
-            <FaQuoteRight className="text-primary text-xl mt-3 ml-4" />
+            <p className="font-medium text-sm text-textPrimary/70">{testimonial?.comment}</p>
+            <div className="flex items-center text-left justify-end">
+            <h3 className="text-lg text-secondary font-semibold">{testimonial?.username}</h3>
+            <FaQuoteRight className="text-primary text-xl mt-3 ml-2" />
             </div>
           </div>
           </SwiperSlide>

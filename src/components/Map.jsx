@@ -3,8 +3,8 @@ const HotelMap = () => {
   const hotelLocation = [23.816777, 90.406162];
 
   return (
-    <div className="h-52 lg:h-[400px] w-full">
-      <h1 className="text-4xl text-textPrimary font-bold text-center pb-6">Our Location</h1>
+    <div className="h-52 lg:h-[400px] w-full pb-20">
+      <h2 className="text-3xl text-primary font-bold text-center pb-6">Our Location</h2>
       <Map
         defaultCenter={hotelLocation}
         defaultZoom={15}
