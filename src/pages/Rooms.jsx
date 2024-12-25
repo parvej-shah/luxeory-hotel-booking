@@ -4,13 +4,12 @@ import { useQuery } from "@tanstack/react-query";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import LoadingClip from "../components/LoadingClip";
+import { toast } from "react-toastify";
 export default function Rooms() {
   const navigate = useNavigate();
   const getRooms = async () => {
-    try {
       const { data } = await API.get("rooms");
       return data;
-    } catch{ /* empty */ }
   };
   const { status, data:rooms } = useQuery({
     queryKey: ["rooms"],
@@ -32,6 +31,12 @@ export default function Rooms() {
         <div className="hero-content text-neutral-content text-center">
             <div className="max-w-md py-8">
             <h2 className="my-5 text-5xl font-bold text-primary">Room List</h2>
+            <button
+                onClick={() =>{toast.success("filtering By Price")}}
+                className="btn md:w-1/2 bg-secondary/90 border-none text-white font-bold px-6 py-3 rounded-lg hover:bg-secondary"
+                >
+                Sort By Price
+                </button>
             </div>
         </div>
         </div>

@@ -1,12 +1,9 @@
-/* eslint-disable react/prop-types */
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import API from "../hooks/useAPI";
 import { useQuery } from "@tanstack/react-query";
 import LoadingClip from "./LoadingClip";
 
 const FeaturedRooms = () => {
-  const navigate = useNavigate();
   const getRooms = async () => {
       const { data } = await API.get("rooms",{
         params:{
