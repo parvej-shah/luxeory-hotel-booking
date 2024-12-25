@@ -4,18 +4,21 @@ import { useQuery } from "@tanstack/react-query";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import LoadingClip from "../components/LoadingClip";
-import { toast } from "react-toastify";
+import { useState } from "react";
 export default function Rooms() {
   const navigate = useNavigate();
+  const [queryParams, setQueryParams] = useState({});
   const getRooms = async () => {
-      const { data } = await API.get("rooms");
+      const { data } = await API.get("rooms",{params:queryParams});
       return data;
   };
   const { status, data:rooms } = useQuery({
-    queryKey: ["rooms"],
+    queryKey: ["rooms",queryParams],
     queryFn: getRooms,
   });
-
+  const handleSortByPrice = () => {
+    setQueryParams({ sortBy: "price" });
+  };
   if (status=='loading') {
     return <LoadingClip/>;
   }
@@ -29,11 +32,11 @@ export default function Rooms() {
         >
         <div className="hero-overlay bg-opacity-60"></div>
         <div className="hero-content text-neutral-content text-center">
-            <div className="max-w-md py-8">
+            <div className="max-w-xl py-8">
             <h2 className="my-5 text-5xl font-bold text-primary">Room List</h2>
             <button
-                onClick={() =>{toast.success("filtering By Price")}}
-                className="btn md:w-1/2 bg-secondary/90 border-none text-white font-bold px-6 py-3 rounded-lg hover:bg-secondary"
+                onClick={handleSortByPrice}
+                className="btn bg-secondary/90 border-none text-white font-bold px-6 py-3 rounded-lg hover:bg-secondary w-fit"
                 >
                 Sort By Price
                 </button>

@@ -25,7 +25,7 @@ export default function Home() {
     <div>
       <Banner/>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-20">
           <div className="relative bg-primary/80 rounded-lg shadow-lg w-11/12 max-w-lg">
             {/* Cancel Icon */}
             <button
