@@ -24,8 +24,12 @@ const MyBookings = () => {
   });
   // Mutation to cancel booking
   const cancelBookingMutation = useMutation(
-    async (bookingId) => {
-      const { data } = await API.delete(`bookings/${bookingId}`);
+    async ({bookingId,roomId}) => {
+      const { data } = await API.delete(`bookings/${bookingId}`,{
+        params:{
+          roomId:roomId,
+        }
+      });
       return data;
     },
     {
@@ -46,13 +50,13 @@ const MyBookings = () => {
       onSuccess: () => {
         toast.success("Booking date updated successfully.");
         queryClient.invalidateQueries(["userBookings"]);
-        setSelectedBooking(null); // Close modal
+        setSelectedBooking(null);
       },
     }
   );
 
   // Handle cancel booking
-  const handleCancelBooking = (bookingId) => {
+  const handleCancelBooking = (bookingId,roomId) => {
     Swal.fire({
       title: "Are you sure?",
       text: "Do you want to cancel this booking?",
@@ -62,7 +66,7 @@ const MyBookings = () => {
       cancelButtonText: "No, keep it",
     }).then((result) => {
       if (result.isConfirmed) {
-        cancelBookingMutation.mutate(bookingId);
+        cancelBookingMutation.mutate({bookingId,roomId});
       }
     });
   };
@@ -111,7 +115,7 @@ console.log(bookings)
                 <td>{new Date(booking.bookingDate).toDateString()}</td>
                 <td>
                   <button
-                    onClick={() => handleCancelBooking(booking._id)}
+                    onClick={() => handleCancelBooking(booking._id,booking.roomId)}
                     className="btn btn-error btn-sm mr-2"
                   >
                     Cancel
