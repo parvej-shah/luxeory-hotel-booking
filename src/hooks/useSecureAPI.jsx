@@ -6,7 +6,7 @@ import { auth } from '../firebase.init';
 
 
 const instance = axios.create({
-    baseURL: 'http://localhost:5000/',
+    baseURL: 'https://luxeory-server.vercel.app/',
     withCredentials: true
 });
 
