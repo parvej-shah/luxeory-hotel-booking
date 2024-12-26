@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { updateProfile } from "firebase/auth";
 import { useAuth } from "./AuthProvider";
 import { auth } from "../firebase.init";
+import { useEffect } from "react";
 export default function RegisterPage() {
   const { createUser, loginWithGoggle } = useAuth();
   const navigate = useNavigate();
@@ -16,6 +17,9 @@ export default function RegisterPage() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  useEffect(()=>{
+    window.scrollTo(0, 0);
+  },[])
   const onSubmit = async (data) => {
     const { userName, email, photoURL, password } = data;
     createUser(email, password)

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import API from "../hooks/useAPI";
@@ -16,6 +16,9 @@ const MyBookings = () => {
   const {user} = useAuth();
   const secureAPI = useSecureAPI();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  useEffect(()=>{
+      window.scrollTo(0, 0);
+    },[])
   // Fetch bookings for the logged-in user
   const fetchMyBookings = async () => {
     const { data } = await secureAPI.get(`bookings/${user?.email}`);

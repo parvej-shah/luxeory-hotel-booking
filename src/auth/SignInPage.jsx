@@ -2,9 +2,10 @@ import Lottie from "lottie-react";
 import { useForm } from "react-hook-form";
 import registerAnimation from "../assets/images/registerAnimation.json";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthProvider";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
 export default function SignInPage() {
   const {
     register,
@@ -13,13 +14,18 @@ export default function SignInPage() {
   } = useForm();
   const { signInUser, loginWithGoggle } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from;
+  useEffect(()=>{
+    window.scrollTo(0, 0);
+  },[])
   const onSubmit = (data) => {
     const {email, password } = data;
         signInUser(email,password)
         .then(() => {
           // Signed up 
           toast.success("Login Successful!");
-          navigate("/");
+          navigate(from || '/');
         })
         .catch((error) => {
           /* const errorCode = error.code; */
@@ -30,7 +36,7 @@ export default function SignInPage() {
     loginWithGoggle()
       .then(() => {
         toast.success("Login Successful!");
-        navigate("/");
+        navigate(from || '/');
       })
       .catch(() => {
         toast.error("Login failed");

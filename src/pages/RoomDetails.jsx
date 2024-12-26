@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {  useQuery ,useMutation, useQueryClient} from "@tanstack/react-query";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import API from "../hooks/useAPI";
 import LoadingClip from "../components/LoadingClip";
 import { toast } from "react-toastify";
@@ -28,7 +28,7 @@ export default function RoomDetails() {
       toast.error("Error fetching room details.");
     }
   };
-
+  const location = useLocation();
   const { status, data: roomDetails } = useQuery({
     queryKey: ["roomDetails"],
     queryFn: getRoomDetails,
@@ -36,6 +36,7 @@ export default function RoomDetails() {
 
   // Map Room Images for ImageGallery
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (roomDetails?.roomImages) {
       const newImages = roomDetails.roomImages.map((img) => ({
         original: img,
@@ -48,7 +49,7 @@ export default function RoomDetails() {
   const handleBooking = ()=>{
     if(!user?.email){
         toast.error("Login is required");
-        navigate('/login');
+        navigate('/login', { state: { from: location.pathname } });
         return;
     }
     if(!roomDetails?.available){

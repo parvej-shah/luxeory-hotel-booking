@@ -24,6 +24,7 @@ const { data:testimonials } = useQuery({
     setIsOpen(false);
   };
   useEffect(() => {
+    window.scrollTo(0, 0);
     const timer = setTimeout(() => {
       setIsOpen(true);
     }, 2000);

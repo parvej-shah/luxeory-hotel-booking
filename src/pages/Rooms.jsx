@@ -4,8 +4,9 @@ import { useQuery } from "@tanstack/react-query";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import LoadingClip from "../components/LoadingClip";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 export default function Rooms() {
+
   const navigate = useNavigate();
   const [queryParams, setQueryParams] = useState({});
   const getRooms = async () => {
@@ -19,6 +20,9 @@ export default function Rooms() {
   const handleSortByPrice = () => {
     setQueryParams({ sortBy: "price" });
   };
+  useEffect(()=>{
+    window.scrollTo(0, 0);
+  },[])
   if (status=='loading') {
     return <LoadingClip/>;
   }
