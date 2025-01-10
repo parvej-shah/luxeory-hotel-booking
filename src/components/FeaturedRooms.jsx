@@ -35,8 +35,9 @@ const FeaturedRooms = () => {
                 alt={room.roomTitle}
                 className="h-52 w-full object-cover"
               />
-              <div className="p-4">
+              <div className="p-4 card-body">
                 <h3 className="text-xl font-semibold mb-2">{room.roomTitle}</h3>
+                <p>
                 <p className="text-gray-600 text-sm mb-3">
                   {room.roomDescription}
                 </p>
@@ -52,10 +53,11 @@ const FeaturedRooms = () => {
                     <i className="ri-group-line"></i> {room.reviewCount} Reviews
                   </span>
                 </div>
-                <div className="card-actions">
-                <Link to={`/rooms/${room?._id}`}>
+                </p>
+                <div className="card-actions justify-stretch w-full">
+                <Link to={`/rooms/${room?._id}`} className="w-full">
                 <button
-                    className="btn bg-secondary/90 border-none text-white font-bold px-6 py-3 rounded-lg hover:bg-secondary w-full my-2"
+                    className="btn bg-secondary/90 border-none text-white font-bold px-8 py-2 rounded-lg hover:bg-secondary w-full"
                 >
                     Book Now
                 </button>
