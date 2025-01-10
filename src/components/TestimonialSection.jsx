@@ -6,42 +6,10 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import ReactStars from "react-stars";
-/* const testimonials = [
-  {
-    name: "Jacob Jones",
-    country: "France",
-    text: "The location of FT hotel is perfect and very central. I was very happy to walk around the hotel, discover surrounding scenes such as beach, night market, museum.",
-    image: "https://via.placeholder.com/80", // Replace with actual image URL
-  },
-  {
-    name: "Peek Thakul",
-    country: "France",
-    text: "Every year, we come back to FT hotel for our holiday. It was extremely interesting and enjoyable! We are happy with our stay in this hotel and we love meals here.",
-    image: "https://via.placeholder.com/80", // Replace with actual image URL
-  },
-  {
-    name: "Ralph Edwards",
-    country: "American",
-    text: "I will be pet i will be pet and then i will hiss sit in box get scared by doggo also cucumerro yet the best thing in the call universe is a cardboard box.",
-    image: "https://via.placeholder.com/80", // Replace with actual image URL
-  },
-  {
-    name: "Ralph Edwards",
-    country: "American",
-    text: "I will be pet i will be pet and then i will hiss sit in box get scared by doggo also cucumerro yet the best thing in the call universe is a cardboard box.",
-    image: "https://via.placeholder.com/80", // Replace with actual image URL
-  },
-  {
-    name: "Ralph Edwards",
-    country: "American",
-    text: "I will be pet i will be pet and then i will hiss sit in box get scared by doggo also cucumerro yet the best thing in the call universe is a cardboard box.",
-    image: "https://via.placeholder.com/80", // Replace with actual image URL
-  },
-]; */
 
 const TestimonialSection = ({testimonials}) => {
   return (
-    <section className="py-12 mt-10 px-6 container mx-auto text-center">
+    <section className="py-10 px-6 container mx-auto text-center ">
       <h2 className="text-3xl text-primary font-bold mb-8">Our Guests Love Us</h2>
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
@@ -61,6 +29,7 @@ const TestimonialSection = ({testimonials}) => {
           },
         }}
       >
+        
 {testimonials?.map((testimonial, index) => (
     <SwiperSlide key={index}>
           <div

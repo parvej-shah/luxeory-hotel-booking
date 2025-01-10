@@ -2,7 +2,7 @@ import LuxeryBanner from '../assets/images/LuxeryBanner.png'
 import hospitalityBanner from '../assets/images/hospitalityBanner.png'
 const LuxuryHotelSection = () => {
     return (
-      <section className="bg-bgStart py-12 my-6 px-6">
+      <section className="bg-bgStart py-10 px-6">
         <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 mb-10">
           {/* Left Image */}
           <div className="w-full md:w-1/2">
