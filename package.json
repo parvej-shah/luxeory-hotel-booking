@@ -16,6 +16,7 @@
     "axios": "^1.7.9",
     "date-fns": "^4.1.0",
     "firebase": "^11.1.0",
+    "hamburger-react": "^2.5.2",
     "lottie-react": "^2.4.0",
     "motion": "^11.15.0",
     "pigeon-maps": "^0.21.6",

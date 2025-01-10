@@ -1,30 +1,35 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
-
+import Hamburger from "hamburger-react";
 export default function Navbar() {
+  const { user, onLogout,hamToggle,setHamToggle } = useAuth();
   const navItems = [
-    { label: "Home", link: "/" },
-    { label: "Rooms", link: "/rooms" },
-    { label: "My Bookings", link: "/my-bookings" },
+    { isPrivate: false, label: "Home", link: "/" },
+    { isPrivate: false, label: "Rooms", link: "/rooms" },
+    { isPrivate: true, label: "Bookings", link: "/my-bookings" },
+    { isPrivate: false, label: "About", link: "/about" },
+    { isPrivate: false, label: "Contact", link: "/contact" },
   ];
   const navigate = useNavigate();
   const [theme, setTheme] = useState(true);
-  const { user,onLogout } = useAuth();
-  const logout = ()=>{
-    navigate('/');
-    onLogout()
-  }
+  const logout = () => {
+    navigate("/");
+    onLogout();
+  };
   const authButtons = (
     <>
       {user?.email ? (
-        <li>
-          <button onClick={logout} className="btn btn-sm hover:bg-primary border-none bg-primary/10 text-primary hover:text-textPrimary transition-all duration-300">
+        <li className="ml-2">
+          <button
+            onClick={logout}
+            className="btn btn-sm hover:bg-primary border-none bg-primary/10 text-primary hover:text-textPrimary transition-all duration-300"
+          >
             Logout
           </button>
         </li>
       ) : (
-        <li>
+        <li className="ml-2">
           <button
             onClick={() => navigate("/login")}
             className="btn btn-sm hover:bg-primary border-none bg-primary/10 text-primary  hover:text-textPrimary transition-all duration-300"
@@ -48,8 +53,8 @@ export default function Navbar() {
     }
   };
   return (
-    < div className="bg-gradient-to-t from-bgStart shadow-b-lg to-bgEnd">
-      <div className="navbar container mx-auto">
+    <div className="bg-gradient-to-t from-bgStart shadow-b-lg to-bgEnd">
+      <div className="navbar container mx-auto relative ">
         <div className="navbar-start">
           <h2 className="text-3xl font-black text-textPrimary mr-1">
             <span className="text-primary">Lux</span>eory
@@ -87,7 +92,9 @@ export default function Navbar() {
               <li key={idx}>
                 <NavLink
                   className={({ isActive }) =>
-                    isActive ? navActive : navInActive
+                    `${isActive ? navActive : navInActive} ${
+                      !user?.email && navItem.isPrivate ? "hidden" : ""
+                    }`
                   }
                   to={navItem.link}
                 >
@@ -98,47 +105,35 @@ export default function Navbar() {
           </ul>
         </div>
         <div className="navbar-end">
-          <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-7 w-7 text-textPrimary"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
-              </svg>
+        <div className="hidden lg:block">
+                  <ul>{authButtons}</ul>
+                </div>
+          <div className="md:hidden ">
+            <Hamburger toggle={()=>setHamToggle(!hamToggle)}
+              toggled={hamToggle}
+              />
             </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-bgStart rounded-box z-[10] mt-3 w-36 p-2 shadow"
-            >
-              {navItems.map((navItem, idx) => (
-                <li key={idx}>
-                  <NavLink
-                    className={({ isActive }) =>
-                      isActive ? navActive : navInActive
-                    }
-                    to={navItem.link}
-                  >
-                    {navItem.label}
-                  </NavLink>
-                </li>
-              ))}
-              {authButtons}
-            </ul>
-          </div>
-          <div className="hidden lg:block">
-            <ul>
-              {authButtons}
-            </ul>
-          </div>
+              <div className={`absolute ease-in-out duration-300 transition-all ${!hamToggle?'-top-56':'top-20 block'} bg-bgStart z-[10] w-32 rounded-md p-2 shadow-md`}>
+                <ul
+                >
+                  {navItems.map((navItem, idx) => (
+                    <li key={idx}>
+                      <NavLink
+                        className={({ isActive }) =>
+                          `${isActive ? navActive : navInActive} ${
+                            !user?.email && navItem?.isPrivate ? "hidden" : ""
+                          }`
+                        }
+                        to={navItem.link}
+                      >
+                        {navItem.label}
+                      </NavLink>
+                    </li>
+                  ))}
+                  {authButtons}
+                </ul>
+                
+              </div>
         </div>
       </div>
     </div>

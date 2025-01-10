@@ -50,7 +50,7 @@ const Banner = () => {
         slidesPerView={1}
         onSlideChange={() => AOS.refresh()}
         speed={800}
-        className="h-[300px] md:h-[580px]"
+        className="h-[300px] md:h-[480px]"
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index} className="relative swiper-slide">

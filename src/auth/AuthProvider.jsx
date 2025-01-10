@@ -18,6 +18,7 @@ const AuthProvider = ({ children }) => {
   const [title, setTitle] = useState("Home|Luxeory");
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [hamToggle, setHamToggle] = useState(false);
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
@@ -75,6 +76,8 @@ const AuthProvider = ({ children }) => {
     loading,
     title,
     setTitle,
+    hamToggle,
+    setHamToggle
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

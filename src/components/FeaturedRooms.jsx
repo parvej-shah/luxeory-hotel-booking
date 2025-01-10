@@ -24,8 +24,8 @@ const FeaturedRooms = () => {
     <div className="bg-bgStart py-10  px-4">
       <div className="container mx-auto">
         <h2 className="text-3xl font-bold text-center mb-8 text-primary">Featured Rooms</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {rooms?.slice(0, 6).map((room) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          {rooms?.slice(0, 8).map((room) => (
             <div
               key={room?._id}
               className="card bg-bgEnd shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow"
@@ -52,6 +52,7 @@ const FeaturedRooms = () => {
                     <i className="ri-group-line"></i> {room.reviewCount} Reviews
                   </span>
                 </div>
+                <div className="card-actions">
                 <Link to={`/rooms/${room?._id}`}>
                 <button
                     className="btn bg-secondary/90 border-none text-white font-bold px-6 py-3 rounded-lg hover:bg-secondary w-full my-2"
@@ -59,6 +60,7 @@ const FeaturedRooms = () => {
                     Book Now
                 </button>
                 </Link>
+                </div>
               </div>
             </div>
           ))}

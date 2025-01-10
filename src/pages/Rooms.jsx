@@ -5,8 +5,9 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import LoadingClip from "../components/LoadingClip";
 import { useEffect, useState } from "react";
+import { useAuth } from "../auth/AuthProvider";
 export default function Rooms() {
-
+  const {setHamToggle} = useAuth();
   const navigate = useNavigate();
   const [queryParams, setQueryParams] = useState({});
   const getRooms = async () => {
@@ -21,8 +22,9 @@ export default function Rooms() {
     setQueryParams({ sortBy: "price" });
   };
   useEffect(()=>{
+    setHamToggle(false);
     window.scrollTo(0, 0);
-  },[])
+  },[setHamToggle]);
   if (status=='loading') {
     return <LoadingClip/>;
   }

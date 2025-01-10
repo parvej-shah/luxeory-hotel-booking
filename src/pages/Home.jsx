@@ -10,8 +10,10 @@ import { AiOutlineClose } from "react-icons/ai";
 import offer from '../assets/images/offer.webp'
 import API from '../hooks/useAPI'
 import { useQuery } from '@tanstack/react-query'
+import { useAuth } from '../auth/AuthProvider'
 export default function Home() {
   const [isOpen, setIsOpen] = useState(true);
+  const {setHamToggle} = useAuth();
   const getTestimonial = async () => {
     const { data } = await API.get("reviews");
     return data;
@@ -25,12 +27,13 @@ const { data:testimonials } = useQuery({
   };
   useEffect(() => {
     window.scrollTo(0, 0);
+    setHamToggle(false);
     const timer = setTimeout(() => {
       setIsOpen(true);
     }, 2000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [setHamToggle]);
   return (
     <div>
       <Banner/>

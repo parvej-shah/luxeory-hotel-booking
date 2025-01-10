@@ -13,12 +13,13 @@ const MyBookings = () => {
   const queryClient = useQueryClient();
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [newDate, setNewDate] = useState(new Date());
-  const {user} = useAuth();
+  const {user,setHamToggle} = useAuth();
   const secureAPI = useSecureAPI();
   const [isModalOpen, setIsModalOpen] = useState(false);
   useEffect(()=>{
       window.scrollTo(0, 0);
-    },[])
+      setHamToggle(false);
+    },[setHamToggle]);
   // Fetch bookings for the logged-in user
   const fetchMyBookings = async () => {
     const { data } = await secureAPI.get(`bookings/${user?.email}`);
