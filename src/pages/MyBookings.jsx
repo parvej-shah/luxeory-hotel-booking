@@ -108,8 +108,21 @@ const MyBookings = () => {
 
 
   return (
+    <section>
+      <div
+                className="hero"
+                style={{
+                    backgroundImage: `url('https://i.ibb.co.com/gdhYXFb/rjjq9xin.png')`,
+                }}
+                >
+                <div className="hero-overlay bg-opacity-70"></div>
+                <div className="hero-content text-neutral-content text-center">
+                    <div className="max-w-xl py-4 md:py-8">
+                    <h2 className="my-5 text-4xl md:text-5xl font-bold text-primary">My Bookings</h2>
+                    </div>
+                </div>
+            </div>
     <div className="container mx-auto p-5">
-      <h2 className="text-2xl font-bold mb-5 text-textPrimary">My Bookings</h2>
       <div className="overflow-x-auto">
         <table className="table table-zebra w-full bg-bgStart">
           <thead>
@@ -201,6 +214,7 @@ const MyBookings = () => {
         username={user?.displayName}
         onSubmitReview={handleReviewSubmit}/>
     </div>
+    </section>
   );
 };
 

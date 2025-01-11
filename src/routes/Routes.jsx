@@ -9,6 +9,7 @@ import RoomDetails from "../pages/RoomDetails";
 import MyBookings from "../pages/MyBookings";
 import PrivateRoute from "../auth/PrivateRoute";
 import ContactUs from "../pages/Contact";
+import About from "../pages/About";
 
 const router = createBrowserRouter([
     {
@@ -44,8 +45,8 @@ const router = createBrowserRouter([
                 element:<ContactUs/>
             },
             {
-                path:'/login',
-                element:<SignInPage/>
+                path:'/about',
+                element:<About/>
             },
         ]
     },

@@ -36,10 +36,10 @@ export default function Rooms() {
             backgroundImage: `url(${roomHeader})`,
         }}
         >
-        <div className="hero-overlay bg-opacity-60"></div>
+        <div className="hero-overlay bg-opacity-70"></div>
         <div className="hero-content text-neutral-content text-center">
-            <div className="max-w-xl py-8">
-            <h2 className="my-5 text-5xl font-bold text-primary">Room List</h2>
+            <div className="max-w-xl py-4 md:py-8">
+            <h2 className="mb-5 text-4xl md:text-5xl font-bold text-primary">Room List</h2>
             <button
                 onClick={handleSortByPrice}
                 className="btn bg-secondary/90 border-none text-white font-bold px-6 py-3 rounded-lg hover:bg-secondary w-fit"

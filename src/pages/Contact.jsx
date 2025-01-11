@@ -3,21 +3,29 @@ import HotelMap from '../components/Map';
 
 const ContactUs = () => {
     return (
-        <section className="py-12">
-            <div className="container mx-auto px-6 lg:px-16 mb-6">
-                <h2 className="text-4xl font-bold text-center text-gray-800 dark:text-white mb-8">
-                    Get In Touch
-                </h2>
-                <p className="text-center text-gray-600 dark:text-gray-400 mb-12">
-                    We&apos;d love to hear from you! Please fill out the form below and we&apos;ll get back to you as soon as possible.
-                </p>
+        <section className="">
+            <div
+                className="hero"
+                style={{
+                    backgroundImage: `url('https://i.ibb.co.com/6NXD6KS/okay4q85.png')`,
+                }}
+                >
+                <div className="hero-overlay bg-opacity-70"></div>
+                <div className="hero-content text-neutral-content text-center">
+                    <div className="max-w-xl py-4 md:py-8">
+                    <h2 className="my-5 text-4xl md:text-5xl font-bold text-primary">Get In Touch</h2>
+                    </div>
+                </div>
+            </div>
+            <div className="container mx-auto px-6 lg:px-16 mb-6 py-12">
+
                 <div className="flex flex-col-reverse lg:flex-row gap-12">
                     {/* Contact Form */}
                     <div className="lg:w-1/2">
                         <form className="bg-bgStart shadow-lg rounded-lg p-6 space-y-4">
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text text-gray-700 dark:text-gray-300">Your Name</span>
+                                    <span className="label-text text-textPrimary">Your Name</span>
                                 </label>
                                 <input
                                     type="text"
@@ -27,7 +35,7 @@ const ContactUs = () => {
                             </div>
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text text-gray-700 dark:text-gray-300">Email Address</span>
+                                    <span className="label-text text-textPrimary">Email Address</span>
                                 </label>
                                 <input
                                     type="email"
@@ -37,7 +45,7 @@ const ContactUs = () => {
                             </div>
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text text-gray-700 dark:text-gray-300">Message</span>
+                                    <span className="label-text text-textPrimary">Message</span>
                                 </label>
                                 <textarea
                                     placeholder="Type your message here..."
@@ -57,8 +65,8 @@ const ContactUs = () => {
                                 <FaPhoneAlt />
                             </div>
                             <div>
-                                <h4 className="text-lg font-bold text-gray-800 dark:text-white">Call Us</h4>
-                                <p className="text-gray-600 dark:text-gray-400">+1-234-567-890</p>
+                                <h4 className="text-lg font-bold text-textPrimary">Call Us</h4>
+                                <p className="text-textPrimary/70">+1-234-567-890</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-4">
@@ -66,8 +74,8 @@ const ContactUs = () => {
                                 <FaEnvelope />
                             </div>
                             <div>
-                                <h4 className="text-lg font-bold text-gray-800 dark:text-white">Email Us</h4>
-                                <p className="text-gray-600 dark:text-gray-400">support@luxeory.com</p>
+                                <h4 className="text-lg font-bold text-textPrimary">Email Us</h4>
+                                <p className="text-textPrimary/70">support@luxeory.com</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-4">
@@ -75,8 +83,8 @@ const ContactUs = () => {
                                 <FaMapMarkerAlt />
                             </div>
                             <div>
-                                <h4 className="text-lg font-bold text-gray-800 dark:text-white">Visit Us</h4>
-                                <p className="text-gray-600 dark:text-gray-400">123 Luxury Lane, Beverly Hills, CA</p>
+                                <h4 className="text-lg font-bold text-textPrimary">Visit Us</h4>
+                                <p className="text-textPrimary/70">123 Luxury Lane, Beverly Hills, CA</p>
                             </div>
                         </div>
                     </div>

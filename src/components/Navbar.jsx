@@ -8,8 +8,8 @@ export default function Navbar() {
     { isPrivate: false, label: "Home", link: "/" },
     { isPrivate: false, label: "Rooms", link: "/rooms" },
     { isPrivate: true, label: "Bookings", link: "/my-bookings" },
-    { isPrivate: false, label: "About", link: "/about" },
-    { isPrivate: false, label: "Contact", link: "/contact" },
+    { isPrivate: false, label: "About Us", link: "/about" },
+    { isPrivate: false, label: "Contacts", link: "/contact" },
   ];
   const navigate = useNavigate();
   const [theme, setTheme] = useState(true);
