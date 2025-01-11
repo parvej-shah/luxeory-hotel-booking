@@ -35,6 +35,7 @@ if(status=='loading'){
         {/* Left: Image Gallery */}
         <div>
           <ImageGallery
+            autoPlay={true}
             items={images}
             showThumbnails={true}
             renderItem={(item) => (

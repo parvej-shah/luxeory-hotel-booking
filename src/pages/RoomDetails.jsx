@@ -125,7 +125,7 @@ export default function RoomDetails() {
         {/* Date Picker */}
         <div className="mt-4">
           <label className="font-semibold">Select Booking Date:</label>
-          <DatePicker
+          {/* <DatePicker
             onChange={setSelectedDate}
             value={selectedDate}
             className="mt-2 rounded-md"
@@ -133,7 +133,8 @@ export default function RoomDetails() {
             clearIcon={null}
             calendarIcon={null}
             required
-          />
+          /> */}
+          <input type="date" value={selectedDate} onChange={(e)=>setSelectedDate(e.target.value)} className="mt-2 rounded-md p-2 w-full"/>
           {/* <DatePicker onChange={onChange} value={value} /> */}
         </div>
         {/* Buttons */}
