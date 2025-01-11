@@ -18,8 +18,8 @@
 }
 [data-theme="dark"]{
   /* Dark Mode Palette */
-  --background-start: 28, 28, 28;     /* #1C1C1C */
-  --background-end: 18, 18, 18;       /* #121212 */
+  --background-start: 17, 24, 39;     /* #1C1C1C */
+  --background-end: 8, 14, 26;       /* #121212 */
   --primary-color: 245, 197, 66;      /* #F5C542 */
   --secondary-color: 0, 109, 91;      /* Muted Emerald Green */
   --text-color: 237, 237, 237;        /* #EDEDED */
