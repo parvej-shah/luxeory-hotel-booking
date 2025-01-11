@@ -66,7 +66,7 @@ export default function RoomDetails() {
     {
       onSuccess: (data) => {
         if (data.acknowledged) {
-          toast.success(`Room booked for ${selectedDate.toDateString()}!`);
+          toast.success(`Room booked for ${new Date(selectedDate).toDateString()}!`);
           setModalIsOpen(false);
           queryClient.invalidateQueries({ queryKey: ["roomDetails"] });
         }
@@ -85,7 +85,7 @@ export default function RoomDetails() {
     const bookingdata = {
         roomId:roomDetails?._id,
         email:user?.email,
-        bookingDate:selectedDate
+        bookingDate: new Date(selectedDate)
     }
     mutation.mutate(bookingdata);
   };
@@ -134,8 +134,7 @@ export default function RoomDetails() {
             calendarIcon={null}
             required
           /> */}
-          <input type="date" value={selectedDate} onChange={(e)=>setSelectedDate(e.target.value)} className="mt-2 rounded-md p-2 w-full"/>
-          {/* <DatePicker onChange={onChange} value={value} /> */}
+          <input type="date" value={selectedDate.toString()} onChange={(e)=>setSelectedDate(e.target.value)} className="mt-2 rounded-md p-2 w-full"/>
         </div>
         {/* Buttons */}
         <div className="flex justify-end mt-6 space-x-2">
